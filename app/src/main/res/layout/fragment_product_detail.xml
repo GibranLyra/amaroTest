@@ -37,15 +37,11 @@
             tools:text="Product Price"/>
 
         <TextView
-            android:id="@+id/productHasPromotion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Has Promotion"/>
-
-        <TextView
             android:id="@+id/productPromotionPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
             tools:text="Product Promotion Price"/>
 
         <TextView
