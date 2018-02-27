@@ -2,13 +2,14 @@ package com.example.amaroservice.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 data class Product(var name: String? = null,
                    var style: String? = null,
                    var codeColor: String? = null,
                    var colorSlug: String? = null,
                    var color: String? = null,
-                   var isOnSale: Boolean = false,
+                   @SerializedName("on_sale") var isOnSale: Boolean = false,
                    var regularPrice: String? = null,
                    var actualPrice: String? = null,
                    var discountPercentage: String? = null,

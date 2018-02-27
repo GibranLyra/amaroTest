@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_product_detail.*
 
 
 internal const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+internal const val EXTRA_PRODUCT_SIZES = "EXTRA_PRODUCT_SIZES"
 private const val PRODUCT_RESULT = "productResult"
 private const val HAS_LOADED = "hasLoaded"
 
@@ -27,20 +28,24 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
     private lateinit var product: Product
 
     private var productId: Product? = null
-    private var hasLoaded = false
+    private var productSizes: ArrayList<String>? = null
 
+    private var hasLoaded = false
     companion object {
-        fun newInstance(product: Product): ProductDetailFragment {
+        fun newInstance(product: Product, productSizes: ArrayList<String>?): ProductDetailFragment {
             val fragment = ProductDetailFragment()
             val bundle = Bundle()
             bundle.putParcelable(EXTRA_PRODUCT, product)
+            bundle.putStringArrayList(EXTRA_PRODUCT_SIZES, productSizes)
             fragment.arguments = bundle
             return fragment
         }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         productId = arguments?.getParcelable(EXTRA_PRODUCT)
+        productSizes = arguments?.getStringArrayList(EXTRA_PRODUCT_SIZES)
         return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 
@@ -96,6 +101,14 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
         productPrice.text = product.regularPrice
         productHasPromotion.text = product.isOnSale.toString()
         productPromotionPrice.text = product.actualPrice
+        productSizes?.forEach {
+            when (it) {
+                "P" -> pSize.visibility = View.VISIBLE
+                "M" -> mSize.visibility = View.VISIBLE
+                "G" -> gSize.visibility = View.VISIBLE
+                "GG" -> ggSize.visibility = View.VISIBLE
+            }
+        }
         //todo handle sizes
         //product.sizes
         GlideApp.with(this)

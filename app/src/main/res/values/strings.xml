@@ -8,4 +8,9 @@
     <string name="content_description_product_image">Product Image</string>
     <string name="product_price_text">Apenas %1$s</string>
     <string name="content_description_product_image_">Product Image</string>
+    <string name="pp_size">PP</string>
+    <string name="p_size">P</string>
+    <string name="m_size">M</string>
+    <string name="g_size">G</string>
+    <string name="gg_size">GG</string>
 </resources>

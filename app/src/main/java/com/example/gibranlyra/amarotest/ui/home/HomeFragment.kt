@@ -107,7 +107,14 @@ class HomeFragment : Fragment(), HomeContract.View {
         val linearLayoutManager = LinearLayoutManager(context)
         productsRecycler.layoutManager = linearLayoutManager
         productsRecycler.adapter = ProductAdapter(products) { product, view ->
-            context?.let { context -> ProductDetailActivity.createIntent(context, product, view) }
+            val productSizes = ArrayList<String>()
+            product.sizes?.forEach {
+                when(it.isAvailable) {
+                    true -> it.size?.let { size -> productSizes.add(size) }
+                }
+            }
+            context?.let { context -> ProductDetailActivity.createIntent(context, product, productSizes, view) }
+
         }
         productsRecycler.setHasFixedSize(true)
     }
