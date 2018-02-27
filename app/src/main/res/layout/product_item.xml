@@ -24,7 +24,7 @@
                 android:layout_width="100dp"
                 android:layout_height="116dp"
                 android:contentDescription="@string/content_description_product_image"
-                android:transitionName="author_image_transition"
+                android:transitionName="product_image_transition"
 
                 tools:src="@drawable/ic_shopping_cart"/>
 

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.example.amaroservice.model.Product
 import com.example.gibranlyra.amarotest.R
 import com.example.gibranlyra.amarotest.ui.base.showSnackBar
+import com.example.gibranlyra.amarotest.ui.productdetail.ProductDetailActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -106,8 +107,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         val linearLayoutManager = LinearLayoutManager(context)
         productsRecycler.layoutManager = linearLayoutManager
         productsRecycler.adapter = ProductAdapter(products) { product, view ->
-            //todo implement details fragment
-//            context?.let { context -> GistDetailActivity.createIntent(context, gist.id, view) }
+            context?.let { context -> ProductDetailActivity.createIntent(context, product, view) }
         }
         productsRecycler.setHasFixedSize(true)
     }
