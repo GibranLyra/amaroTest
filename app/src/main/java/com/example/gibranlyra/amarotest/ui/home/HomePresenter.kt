@@ -2,8 +2,8 @@ package com.example.gibranlyra.amarotest.ui.home
 
 import br.com.net.nowonline.presentation.util.schedulers.BaseSchedulerProvider
 import com.example.amaroservice.product.ProductDataSource
-import gibran.com.br.gistconsumer.util.ObserverHelper
-import gibran.com.br.gistconsumer.util.tests.EspressoIdlingResource
+import com.example.gibranlyra.amarotest.util.ObserverHelper
+import com.example.gibranlyra.amarotest.util.tests.EspressoIdlingResource
 import io.reactivex.disposables.Disposable
 
 /**

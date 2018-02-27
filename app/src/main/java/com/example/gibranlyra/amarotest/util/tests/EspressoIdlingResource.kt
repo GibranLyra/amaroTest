@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package gibran.com.br.gistconsumer.util.tests
+package com.example.gibranlyra.amarotest.util.tests
 
 
 import android.support.test.espresso.IdlingResource
-import com.example.gibranlyra.amarotest.util.tests.SimpleCountingIdlingResource
 
 /**
  * Contains a static reference to [IdlingResource], only available in the 'mock' build type.

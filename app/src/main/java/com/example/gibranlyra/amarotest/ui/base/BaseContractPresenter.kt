@@ -1,4 +1,4 @@
-package gibran.com.br.gistconsumer.ui.base
+package com.example.gibranlyra.amarotest.ui.base
 
 
 

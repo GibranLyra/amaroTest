@@ -10,7 +10,7 @@ import com.example.amaroservice.product.ProductApi
 import com.example.gibranlyra.amarotest.R
 import com.example.gibranlyra.amarotest.ui.replaceFragmentInActivity
 import com.example.gibranlyra.amarotest.ui.setupActionBar
-import gibran.com.br.gistconsumer.util.tests.EspressoIdlingResource
+import com.example.gibranlyra.amarotest.util.tests.EspressoIdlingResource
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {

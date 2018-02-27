@@ -1,4 +1,4 @@
-package gibran.com.br.gistconsumer.util
+package com.example.gibranlyra.amarotest.util
 
 import io.reactivex.disposables.Disposable
 

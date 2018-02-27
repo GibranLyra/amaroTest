@@ -3,6 +3,7 @@ package com.example.gibranlyra.amarotest.ui.home
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,22 +88,23 @@ class HomeFragment : Fragment(), HomeContract.View {
         }
     }
 
-    override fun showProducts(gists: MutableList<Product>) {
-//        favoritesRecycler.adapter?.let {
-//            (it as GistAdapter).add(gists)
-//        } ?: run {
-//            hasLoaded = true
-//            setupRecycler(gists)
-//        }
+    override fun showProducts(products: MutableList<Product>) {
+        productsRecycler.adapter?.let {
+            (it as ProductAdapter).add(products as ArrayList<Product>)
+        } ?: run {
+            hasLoaded = true
+            setupRecycler(products)
+        }
     }
 
-    private fun setupRecycler(gists: MutableList<Product>) {
-//        this.products = gists
-//        val linearLayoutManager = LinearLayoutManager(context)
-//        favoritesRecycler.layoutManager = linearLayoutManager
-//        favoritesRecycler.adapter = GistAdapter(gists.toMutableList()) { gist, view ->
+    private fun setupRecycler(products: MutableList<Product>) {
+        this.products = products
+        val linearLayoutManager = LinearLayoutManager(context)
+        productsRecycler.layoutManager = linearLayoutManager
+        productsRecycler.adapter = ProductAdapter(products) { product, view ->
+            //todo implement details fragment
 //            context?.let { context -> GistDetailActivity.createIntent(context, gist.id, view) }
-//        }
-//        favoritesRecycler.setHasFixedSize(true)
+        }
+        productsRecycler.setHasFixedSize(true)
     }
 }
