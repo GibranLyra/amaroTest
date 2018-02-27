@@ -22,7 +22,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var presenter: HomeContract.Presenter
 
     private var hasLoaded = false
-    private var products: MutableList<Product>? = null
+    private var products: ArrayList<Product>? = null
 
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
@@ -38,11 +38,16 @@ class HomeFragment : Fragment(), HomeContract.View {
             hasLoaded = savedInstanceState.getBoolean(HAS_LOADED, false)
             when (hasLoaded) {
                 true -> {
-                    //todo fix parceable
-//                    products = savedInstanceState.getParcelableArrayList(PRODUCTS_RESULT)
-//                    products?.let { showGists(it) }
+                    products = savedInstanceState.getParcelableArrayList(PRODUCTS_RESULT)
+                    products?.let { showProducts(it) }
                 }
             }
+        }
+        swipeRefreshLayout.setOnRefreshListener {
+            productsRecycler.adapter?.let {
+                (it as ProductAdapter).clear()
+            }
+            presenter.loadProducts()
         }
     }
 
@@ -55,8 +60,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        //todo fix parceable
-//        outState.putParcelableArrayList(PRODUCTS_RESULT, products)
+        outState.putParcelableArrayList(PRODUCTS_RESULT, products)
         outState.putBoolean(HAS_LOADED, hasLoaded)
     }
 
@@ -88,16 +92,16 @@ class HomeFragment : Fragment(), HomeContract.View {
         }
     }
 
-    override fun showProducts(products: MutableList<Product>) {
+    override fun showProducts(products: ArrayList<Product>) {
         productsRecycler.adapter?.let {
-            (it as ProductAdapter).add(products as ArrayList<Product>)
+            (it as ProductAdapter).add(products)
         } ?: run {
             hasLoaded = true
             setupRecycler(products)
         }
     }
 
-    private fun setupRecycler(products: MutableList<Product>) {
+    private fun setupRecycler(products: ArrayList<Product>) {
         this.products = products
         val linearLayoutManager = LinearLayoutManager(context)
         productsRecycler.layoutManager = linearLayoutManager
