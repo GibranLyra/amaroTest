@@ -20,7 +20,7 @@ object ProductApi : ProductDataSource {
     override fun getProducts(): Observable<MutableList<Product>> {
         return productService.getProducts()
                 .map {
-                    return@map it.toMutableList()
+                    return@map it.products
                 }
                 .doOnError { e -> Timber.e(e, "getProducts: %s", e.message) }
     }

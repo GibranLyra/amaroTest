@@ -1,6 +1,6 @@
 package com.example.amaroservice.product
 
-import com.example.amaroservice.model.Product
+import com.example.amaroservice.model.BaseProductResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 
@@ -10,5 +10,5 @@ import retrofit2.http.GET
 internal interface ProductService {
     /*Code from mocky.io*/
     @GET("59b6a65a0f0000e90471257d")
-    fun getProducts(): Observable<List<Product>>
+    fun getProducts(): Observable<BaseProductResponse>
 }
