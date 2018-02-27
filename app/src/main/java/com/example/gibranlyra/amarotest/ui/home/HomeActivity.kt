@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import br.com.net.nowonline.presentation.util.schedulers.SchedulerProvider
 import com.example.amaroservice.product.ProductApi
 import com.example.gibranlyra.amarotest.R
+import com.example.gibranlyra.amarotest.ui.about.AboutFragment
 import com.example.gibranlyra.amarotest.ui.replaceFragmentInActivity
 import com.example.gibranlyra.amarotest.ui.setupActionBar
 import com.example.gibranlyra.amarotest.util.tests.EspressoIdlingResource
@@ -39,9 +40,15 @@ class HomeActivity : AppCompatActivity() {
         HomePresenter(ProductApi, fragment, SchedulerProvider)
     }
 
+    private fun openAboutFragment() {
+        replaceFragmentInActivity(AboutFragment.newInstance(), R.id.contentFrame)
+    }
+
+
     private fun changeFragment(@IdRes itemId: Int) {
         when (itemId) {
             R.id.action_home -> openHomeFragment()
+            R.id.action_about -> openAboutFragment()
         }
     }
 

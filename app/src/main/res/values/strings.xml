@@ -14,4 +14,5 @@
     <string name="m_size">M</string>
     <string name="g_size">G</string>
     <string name="gg_size">GG</string>
+    <string name="about_image_content_description">About Image</string>
 </resources>

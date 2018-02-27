@@ -42,7 +42,7 @@ class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .load(item.image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_shopping_cart)
-                .into(productImage)
-        setOnClickListener { listener(item, productImage) }
+                .into(productDetailsImage)
+        setOnClickListener { listener(item, productDetailsImage) }
     }
 }

@@ -125,6 +125,6 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
         GlideApp.with(this)
                 .load(product.image)
                 .placeholder(R.drawable.ic_shopping_cart)
-                .into(productImage)
+                .into(productDetailsImage)
     }
 }
