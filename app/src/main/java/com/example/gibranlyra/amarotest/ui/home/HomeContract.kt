@@ -16,5 +16,7 @@ interface HomeContract {
 
     interface Presenter : BaseContractPresenter {
         fun loadProducts()
+        fun onlyDeals()
+        fun orderByPrice()
     }
 }

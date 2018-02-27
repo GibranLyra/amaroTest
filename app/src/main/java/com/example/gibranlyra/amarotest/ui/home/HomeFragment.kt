@@ -7,9 +7,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.allattentionhere.fabulousfilter.AAH_FabulousFragment
 import com.example.amaroservice.model.Product
 import com.example.gibranlyra.amarotest.R
 import com.example.gibranlyra.amarotest.ui.base.showSnackBar
+import com.example.gibranlyra.amarotest.ui.filter.FilterFragment
 import com.example.gibranlyra.amarotest.ui.productdetail.ProductDetailActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -19,16 +21,16 @@ import kotlinx.android.synthetic.main.fragment_home.*
 private const val PRODUCTS_RESULT = "productsResult"
 private const val HAS_LOADED = "hasLoaded"
 
-class HomeFragment : Fragment(), HomeContract.View {
+class HomeFragment : Fragment(), HomeContract.View, AAH_FabulousFragment.Callbacks {
     private lateinit var presenter: HomeContract.Presenter
 
     private var hasLoaded = false
-    private var products: ArrayList<Product>? = null
 
+    private var products: ArrayList<Product>? = null
     companion object {
+
         fun newInstance(): HomeFragment = HomeFragment()
     }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -50,6 +52,16 @@ class HomeFragment : Fragment(), HomeContract.View {
             }
             presenter.loadProducts()
         }
+        setupFilterButton()
+    }
+
+    private fun setupFilterButton() {
+        val filterFragment = FilterFragment.newInstance()
+        filterFragment.setParentFab(filterButton)
+        filterButton.setOnClickListener({
+            filterFragment.setCallbacks(this@HomeFragment)
+            filterFragment.show(activity?.supportFragmentManager, filterFragment.getTag())
+        })
     }
 
     override fun onResume() {
@@ -67,6 +79,14 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun isActive(): Boolean {
         return isAdded
+    }
+
+    override fun onResult(result: Any?) {
+        when(result as String) {
+            "price" -> presenter.orderByPrice()
+            "deals" -> presenter.onlyDeals()
+            "noFilter" -> presenter.loadProducts()
+        }
     }
 
     override fun setPresenter(presenter: HomeContract.Presenter) {
@@ -95,7 +115,8 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun showProducts(products: ArrayList<Product>) {
         productsRecycler.adapter?.let {
-            (it as ProductAdapter).add(products)
+            (it as ProductAdapter).clear()
+            it.add(products)
         } ?: run {
             hasLoaded = true
             setupRecycler(products)
