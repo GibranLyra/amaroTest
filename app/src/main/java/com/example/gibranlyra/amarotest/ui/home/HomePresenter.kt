@@ -1,7 +1,6 @@
 package com.example.gibranlyra.amarotest.ui.home
 
 import br.com.net.nowonline.presentation.util.schedulers.BaseSchedulerProvider
-import com.example.amaroservice.model.Product
 import com.example.amaroservice.product.ProductDataSource
 import com.example.gibranlyra.amarotest.util.ObserverHelper
 import com.example.gibranlyra.amarotest.util.tests.EspressoIdlingResource
@@ -44,7 +43,7 @@ class HomePresenter(private val productsDataSource: ProductDataSource,
                         EspressoIdlingResource.decrement() // Set app as idle.
                     }
                 })
-                .subscribe({ view.showProducts(it as ArrayList<Product>) },
+                .subscribe({ view.showProducts(it) },
                         {
                             view.showError(true)
                         })

@@ -17,7 +17,7 @@ object ProductApi : ProductDataSource {
         productService = retrofit.create(ProductService::class.java)
     }
 
-    override fun getProducts(): Observable<MutableList<Product>> {
+    override fun getProducts(): Observable<ArrayList<Product>> {
         return productService.getProducts()
                 .map {
                     return@map it.products

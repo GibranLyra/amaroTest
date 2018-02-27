@@ -7,5 +7,5 @@ import io.reactivex.Observable
  * Created by gibranlyra on 26/02/18 for amarotest.
  */
 interface ProductDataSource {
-    fun getProducts(): Observable<MutableList<Product>>
+    fun getProducts(): Observable<ArrayList<Product>>
 }
