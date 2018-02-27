@@ -22,8 +22,9 @@
 
         <ImageView
             android:id="@+id/productImage"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:contentDescription="@string/content_description_product_image_"
             android:transitionName="product_image_transition"
             tools:src="@drawable/ic_shopping_cart"/>
@@ -53,16 +54,6 @@
             tools:text="Product Available sizes"/>
 
     </LinearLayout>
-
-    <android.support.v4.widget.ContentLoadingProgressBar
-        android:id="@+id/loadingProgressBar"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        tools:visibility="visible"/>
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/buyButton"

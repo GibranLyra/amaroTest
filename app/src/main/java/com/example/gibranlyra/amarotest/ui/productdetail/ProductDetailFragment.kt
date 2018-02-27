@@ -1,6 +1,7 @@
 package com.example.gibranlyra.amarotest.ui.productdetail
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import com.example.amaroservice.model.Product
 import com.example.gibranlyra.amarotest.R
 import com.example.gibranlyra.amarotest.ui.GlideApp
+import com.example.gibranlyra.amarotest.ui.base.showSnackBar
 import kotlinx.android.synthetic.main.fragment_product_detail.*
 
 /**
@@ -24,7 +26,7 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
 
     private lateinit var product: Product
 
-    private var productId: String? = null
+    private var productId: Product? = null
     private var hasLoaded = false
 
     companion object {
@@ -38,7 +40,7 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        productId = arguments?.getString(EXTRA_PRODUCT)
+        productId = arguments?.getParcelable(EXTRA_PRODUCT)
         return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 
@@ -58,8 +60,7 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
     override fun onResume() {
         super.onResume()
         if (!hasLoaded) {
-            //TODO SETUP PRODUCT
-//            productId?.let { presenter.loadProduct(it) }
+            productId?.let { presenter.loadProduct(it) }
         }
     }
 
@@ -77,26 +78,15 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
         this.presenter = presenter
     }
 
-    override fun showLoading(show: Boolean) {
-        when (show) {
-            true -> {
-                loadingProgressBar.show()
-            }
-            else -> {
-                loadingProgressBar.hide()
-            }
-        }
-    }
-
     override fun showError(show: Boolean) {
         //todo setup error
         when (show) {
             true -> {
-//                view?.showSnackBar(getString(R.string.generic_error), Snackbar.LENGTH_INDEFINITE,
-//                        getString(R.string.try_again), { productId?.let { presenter.loadProduct(it) } })
-//                errorView.visibility = View.VISIBLE
+                view?.showSnackBar(getString(R.string.generic_error), Snackbar.LENGTH_INDEFINITE,
+                        getString(R.string.try_again), { productId?.let { presenter.loadProduct(it) } })
+                errorView.visibility = View.VISIBLE
             }
-//            else -> errorView.visibility = View.GONE
+            else -> errorView.visibility = View.GONE
         }
     }
 
@@ -110,7 +100,6 @@ class ProductDetailFragment : Fragment(), ProductDetailContract.View {
         //product.sizes
         GlideApp.with(this)
                 .load(product.image)
-                .centerCrop()
                 .placeholder(R.drawable.ic_shopping_cart)
                 .into(productImage)
     }
