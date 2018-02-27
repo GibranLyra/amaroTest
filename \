@@ -1,0 +1,13 @@
+added some libs and appContext
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: Gibran Lyra <gibranlyra@Gibrans-MacBook-Pro.local>
+#
+# On branch master
+# Changes to be committed:
+#	modified:   app/build.gradle
+#	modified:   app/src/main/AndroidManifest.xml
+#	new file:   app/src/main/java/com/example/gibranlyra/amarotest/AppContext.kt
+#
