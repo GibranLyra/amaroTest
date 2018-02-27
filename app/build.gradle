@@ -90,4 +90,6 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso.idling:idling-concurrent:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
     implementation "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espressoVersion"
+    //Fabulous filter
+    compile 'com.allattentionhere:fabulousfilter:0.0.5'
 }

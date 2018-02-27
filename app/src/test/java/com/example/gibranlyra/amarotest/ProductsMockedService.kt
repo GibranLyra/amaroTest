@@ -1,9 +1,9 @@
 package com.example.gibranlyra.amarotest
 
 import com.example.amaroservice.AmaroApiModule
+import com.example.amaroservice.model.BaseProductResponse
 import com.example.amaroservice.model.Product
 import com.example.amaroservice.product.ProductDataSource
-import com.google.gson.reflect.TypeToken
 import io.reactivex.Observable
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -18,7 +18,8 @@ object ProductMockedService : ProductDataSource {
         val gson = AmaroApiModule.getGsonBuilder()
         val productsRaw = javaClass.classLoader.getResourceAsStream("productsMockedResponse.json")
         val productsResponseJson = BufferedReader(InputStreamReader(productsRaw))
-        PRODUCTS = gson.fromJson(productsResponseJson, object : TypeToken<ArrayList<Product>>() {}.type)
+        val baseResponse = gson.fromJson(productsResponseJson, BaseProductResponse::class.java)
+        PRODUCTS = baseResponse.products
     }
 
     override fun getProducts(): Observable<ArrayList<Product>> {
