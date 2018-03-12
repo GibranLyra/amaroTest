@@ -25,7 +25,7 @@ App is based on the [Google TODO MVP pattern](https://github.com/googlesamples/a
 License
 ==========
 
-Copyright (c) pakoito 2015
+Copyright (c) GibranLyra 2018
 
 GNU GENERAL PUBLIC LICENSE
 
