@@ -59,8 +59,8 @@ class HomePresenterUnitTest {
 
         val inOrder = Mockito.inOrder(viewContract)
         inOrder.verify(viewContract).setPresenter(presenterContract)
-        inOrder.verify(viewContract).showLoading(true)
         inOrder.verify(viewContract).showError(false)
+        inOrder.verify(viewContract).showLoading(true)
         inOrder.verify(viewContract).showLoading(false)
         inOrder.verify(viewContract).showError(true)
         Mockito.verify(viewContract, Mockito.never()).showProducts(ProductMockedService.PRODUCTS)
