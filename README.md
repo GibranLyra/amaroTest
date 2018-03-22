@@ -22,5 +22,13 @@ App is based on the [Google TODO MVP pattern](https://github.com/googlesamples/a
  - Unit tests under [test folder](https://github.com/GibranLyra/amaroTest/tree/master/app/src/test/java/com/example/gibranlyra/amarotest).
  - Instrumentation test under [androidtests folder](https://github.com/GibranLyra/amaroTest/blob/master/app/src/androidTest/java/com/example/gibranlyra/amarotest/HomeScreenTest.java).
 
+License
+==========
 
- 
+Copyright (c) GibranLyra 2018
+
+GNU GENERAL PUBLIC LICENSE
+
+Version 3, 29 June 2007
+
+See LICENSE.md
