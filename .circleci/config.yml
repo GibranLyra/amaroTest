@@ -1,43 +1,41 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
+machine:
+    java:
+        version: oraclejdk8
     environment:
-      # Customize the JVM maximum heap limit
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
+        ANDROID_HOME: /usr/local/android-sdk-linux
+        ANDROID_BUILD_TOOLS: 27.0.2
+        APPLICATION_ID: com.example.gibranlyra.amarotest
+    dependencies:
+        pre:
+            # Remove any leftover lock from previous builds
+            - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
-    steps:
-      - checkout
+            # Make sure we have the sdkmanager available, and update the Android SDK tools if not
+            - if [ ! -e $ANDROID_HOME/tools/bin/sdkmanager ]; then echo y | android update sdk --no-ui --all --filter tools; fi
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            # Pre-accept Android SDK components licenses
+            - mkdir "$ANDROID_HOME/licenses" || true
+            - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
 
-      - run: gradle dependencies
+            # Install all the required SDK components
+            - $ANDROID_HOME/tools/bin/sdkmanager --verbose "platform-tools" "build-tools;"$ANDROID_BUILD_TOOLS "extras;google;m2repository"
+        override:
+                # Force Gradle to pre-download dependencies for the app module (the default would only be for the root, which is useless)
+                - if [ -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
+            cache_directories:
+                    # Android SDK
+                    - /usr/local/android-sdk-linux/tools
+                    - /usr/local/android-sdk-linux/platform-tools
+                    - /usr/local/android-sdk-linux/build-tools
+                    - /usr/local/android-sdk-linux/licenses
+                    - /usr/local/android-sdk-linux/extras/google/m2repository
 
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+                    # Gradle caches
+                    - /home/ubuntu/.gradle/caches/
+                    - /home/ubuntu/.gradle/wrapper/
 
-      # run tests!
-      - run: gradle test
+        test:
+            pre:
 
+            override:
+                - ./gradlew check --no-daemon --console=plain --continue
