@@ -18,7 +18,6 @@ jobs:
 
     environment:
       # Customize the JVM maximum heap limit
-      ANDROID_HOME: /usr/local/android-sdk-linux
       ANDROID_BUILD_TOOLS: 27.0.2
       APPLICATION_ID: com.example.gibranlyra.amarotest
 
